@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DESU Matching Puzzle</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #f6f6f6;
+      }
+
+      #header {
+        background-color: #584141;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #title {
+        font-size: 22px;
+        font-weight: 600;
+        color: #b38cdc;
+      }
+
+      #controls button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      #checkButton {
+        background-color: #c74d4d;
+        color: white;
+      }
+
+      #helpButton {
+        background-color: #e0e0e0;
+        color: #333;
+      }
+
+      #blocklyDiv {
+        height: calc(100vh - 60px);
+        width: 100%;
+      }
+
+
+
+    </style>
+  </head>
+
+  <body onload="start()">
+    <div id="header">
+      <div id="title">DESU  Matching Puzzle</div>
+      <div id="controls">
+        <button id="checkButton" onclick="checkAllAnswers()">Check Answers</button>
+      </div>
+    </div>
+
+    <div id="blocklyDiv"></div>
+
+    <script src="js.js"></script>
+  </body>
+</html>
