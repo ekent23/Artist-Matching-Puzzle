@@ -1,27 +1,38 @@
-
+// Define custom blocks
 Blockly.Blocks['artist_block'] = {
   init: function() {
-    this.appendDummyInput()
-      .appendField("Artist: ")
-      .appendField(new Blockly.FieldLabel("Artist's Name"), "ARTIST_NAME")
-      .appendField(new Blockly.FieldImage("teacher_placeholder.png", 64, 64, "Artist Image"), "ARTIST_IMAGE_URL");
-
+    this.appendValueInput("ARTIST_INFO")
+      .setCheck("artist_image")
+      .appendField("Artist:");
+    
     this.appendStatementInput("GENRE")
       .setCheck("genre_block")
       .appendField("🎵 Genre:");
 
     this.appendStatementInput("FUN_FACTS")
       .setCheck("fact_block")
-      .appendField("💡 fun facts:");
+      .appendField("💡 Fun Facts:");
      
     this.appendStatementInput("AUDIO")
       .setCheck("audio_block")
       .appendField("🎧 Audio Clips:");
 
     this.setColour(160);
-    this.setDeletable(false);
+    this.setTooltip("Create an artist and attach info");
+    this.setHelpUrl("");
+  }
+};
 
-   
+// blocks for the artist picture that gets dragged over  
+Blockly.Blocks['artist_image_block'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("", 80, 80, "Artist"), "ARTIST_IMAGE")
+      .appendField(new Blockly.FieldLabel("Artist Name"), "ARTIST_NAME");
+    
+    this.setOutput(true, "artist_image");
+    this.setColour(160);
+    this.setTooltip("Artist image to attach to artist block");
   }
 };
 
@@ -45,8 +56,6 @@ Blockly.Blocks['fact_block'] = {
     this.setPreviousStatement(true, "fact_block");
     this.setNextStatement(true, "fact_block");
     this.setColour(50);
-
-   
   }
 };
 
@@ -73,82 +82,92 @@ Blockly.Blocks['audio_block'] = {
   }
 };
 
-
-
-
-
 let workspace;
 
 function start() {
-  workspace = Blockly.inject('blocklyDiv', {
-    toolbox: null,
-    trashcan: true,
-    grid: { spacing: 25, length: 3, colour: '#ccc', snap: true },
-    move: { scrollbars: true, drag: true, wheel: true }
-  });
+  // Load the toolbox XML
+  fetch('toolbox.xml')
+    .then(response => response.text())
+    .then(toolboxXml => {
+      workspace = Blockly.inject('blocklyDiv', {
+        toolbox: toolboxXml,
+        trashcan: true,
+        grid: { spacing: 25, length: 3, colour: '#ccc', snap: true },
+        move: { scrollbars: true, drag: true, wheel: true }
+      });
 
- 
-  const artist = [
-    { name: 'Adele', image: 'Adele.jpg', x: 50, y: 50 },
-    { name: 'Kanye West', image: 'kanye.jpeg', x: 400, y: 50 },
-    { name: 'Carrie Underwood', image: 'carrie.jpeg', x: 750, y: 50 }
-  ];
-
-  artist.forEach(t => {
-    const block = workspace.newBlock('artist_block');
-    block.setFieldValue(t.name, 'ARTIST_NAME');
-    block.setFieldValue(t.image, 'ARTIST_IMAGE_URL');
-    block.initSvg();
-    block.render();
-    block.moveBy(t.x, t.y);
-  });
-
-
-  const genre = [
-    { name: 'Country', x: 100, y: 300 },
-    { name: 'Pop', x: 500, y: 300 },
-    { name: 'Hip-Hop', x: 900, y: 350 }
-  ];
-
-  genre.forEach(c => {
-    const block = workspace.newBlock('genre_block');
-    block.setFieldValue(c.name, 'GENRE_NAME');
-    block.initSvg();
-    block.render();
-    block.moveBy(c.x, c.y);
-  });
-
-  const facts = [
-    { name: 'This person shares the record with Beyoncé for the most Grammy Awards won by a female artist in a single night.', x:150, y: 550 },
-    { name: 'This song was a diss to Drake', x: 400, y: 500 },
-    { name: "The song was also one of the first country songs to reach top 10 on the Billboard Hot 100 and spend 64 consecutive weeks up there.", x:120, y: 450}
-  ];
-
-  facts.forEach(f => {
-    const block = workspace.newBlock('fact_block');
-    block.setFieldValue(f.name, 'FACT_TEXT');
-    block.initSvg();
-    block.render();
-    block.moveBy(f.x, f.y);
-  });
-const audioClips = [
-  { label: "Adele Clip", url: "Skyfall.mp3", x: 150, y: 650 },
-  { label: "Kanye Clip", url: "LiftYourself.mp3", x: 500, y: 650 },
-  { label: "Carrie Clip", url: "BeforeHeCheats.mp3", x: 850, y: 650 }
-];
-
-audioClips.forEach(a => {
-  const block = workspace.newBlock('audio_block');
-  block.setFieldValue(a.label, 'AUDIO_LABEL');
-  block.setFieldValue(a.url, 'AUDIO_URL');
-  block.initSvg();
-  block.render();
-  block.moveBy(a.x, a.y);
-});
-
+     
+      createInitialBlocks();
+    });
 }
+//pre placed blocks
+function createInitialBlocks() {
+  // Create Adele image block
+  const adeleImageBlock = workspace.newBlock('artist_image_adele');
+  adeleImageBlock.initSvg();
+  adeleImageBlock.render();
+  adeleImageBlock.moveBy(100, 100);
 
-function checkAllAnswers() {
+  // Create blank artist block with Adele attached
+  const artistBlock = workspace.newBlock('artist_block');
+  artistBlock.initSvg();
+  artistBlock.render();
+  artistBlock.moveBy(50, 50);
+
+  // Connect Adele image to the artist block
+  const artistInfoConnection = artistBlock.getInput('ARTIST_INFO').connection;
+  const adeleOutputConnection = adeleImageBlock.outputConnection;
+  artistInfoConnection.connect(adeleOutputConnection);
+
+  // Create Pop genre block
+  const popGenreBlock = workspace.newBlock('genre_block');
+  popGenreBlock.setFieldValue('Pop', 'GENRE_NAME');
+  popGenreBlock.initSvg();
+  popGenreBlock.render();
+
+  // Connect Pop genre block to the artist block
+  const genreConnection = artistBlock.getInput('GENRE').connection;
+  const popPreviousConnection = popGenreBlock.previousConnection;
+  genreConnection.connect(popPreviousConnection);
+}
+// Adele image block
+Blockly.Blocks['artist_image_adele'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("Adele.jpg", 80, 80, "Adele"))
+      .appendField("Adele");
+    
+    this.setOutput(true, "artist_image");
+    this.setColour(160);
+    this.setTooltip("Adele");
+  }
+};
+
+// Kanye image block
+Blockly.Blocks['artist_image_kanye'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("kanye.jpeg", 80, 80, "Kanye West"))
+      .appendField("Kanye West");
+    
+    this.setOutput(true, "artist_image");
+    this.setColour(160);
+    this.setTooltip("Kanye West");
+  }
+};
+
+// Carrie image block
+Blockly.Blocks['artist_image_carrie'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("carrie.jpeg", 80, 80, "Carrie Underwood"))
+      .appendField("Carrie Underwood");
+    
+    this.setOutput(true, "artist_image");
+    this.setColour(160);
+    this.setTooltip("Carrie Underwood");
+  }
+};function checkAllAnswers() {
   if (!workspace) return;
 
   const artistBlocks = workspace.getBlocksByType('artist_block', false);
@@ -171,49 +190,62 @@ function checkAllAnswers() {
       audio: ['Carrie Clip']
     }
   };
-artistBlocks.forEach(block => {
-  const artistName = block.getFieldValue('ARTIST_NAME');
-  const expected = correctData[artistName];
-  if (!expected) return;
 
-  let genreBlock = block.getInputTargetBlock('GENRE');
-  const actualGenres = [];
-  while (genreBlock) {
-    actualGenres.push(genreBlock.getFieldValue('GENRE_NAME'));
-    genreBlock = genreBlock.nextConnection && genreBlock.nextConnection.targetBlock();
-  }
+  artistBlocks.forEach(block => {
+    // Get the artist name from the attached image block
+    const artistImageBlock = block.getInputTargetBlock('ARTIST_INFO');
+    if (!artistImageBlock) return;
+    
+    // Determine artist name based on block type
+    let artistName;
+    if (artistImageBlock.type === 'artist_image_adele') {
+      artistName = 'Adele';
+    } else if (artistImageBlock.type === 'artist_image_kanye') {
+      artistName = 'Kanye West';
+    } else if (artistImageBlock.type === 'artist_image_carrie') {
+      artistName = 'Carrie Underwood';
+    }
+    
+    const expected = correctData[artistName];
+    if (!expected) return;
 
-  const genreMatch =
-    actualGenres.length === expected.genre.length &&
-    actualGenres.every(c => expected.genre.includes(c));
+    let genreBlock = block.getInputTargetBlock('GENRE');
+    const actualGenres = [];
+    while (genreBlock) {
+      actualGenres.push(genreBlock.getFieldValue('GENRE_NAME'));
+      genreBlock = genreBlock.nextConnection && genreBlock.nextConnection.targetBlock();
+    }
 
-  let factBlock = block.getInputTargetBlock('FUN_FACTS');
-  const actualFacts = [];
-  while (factBlock) {
-    actualFacts.push(factBlock.getFieldValue('FACT_TEXT'));
-    factBlock = factBlock.nextConnection && factBlock.nextConnection.targetBlock();
-  }
+    const genreMatch =
+      actualGenres.length === expected.genre.length &&
+      actualGenres.every(c => expected.genre.includes(c));
 
-  const factMatch =
-    actualFacts.length === expected.facts.length &&
-    actualFacts.every(f => expected.facts.includes(f));
+    let factBlock = block.getInputTargetBlock('FUN_FACTS');
+    const actualFacts = [];
+    while (factBlock) {
+      actualFacts.push(factBlock.getFieldValue('FACT_TEXT'));
+      factBlock = factBlock.nextConnection && factBlock.nextConnection.targetBlock();
+    }
 
-let audioBlock = block.getInputTargetBlock('AUDIO');
-const actualAudio = [];
-while (audioBlock) {
-  actualAudio.push(audioBlock.getFieldValue('AUDIO_LABEL'));
-  audioBlock = audioBlock.nextConnection && audioBlock.nextConnection.targetBlock();
-}
+    const factMatch =
+      actualFacts.length === expected.facts.length &&
+      actualFacts.every(f => expected.facts.includes(f));
 
-const audioMatch =
-  actualAudio.length === expected.audio.length &&
-  actualAudio.every(a => expected.audio.includes(a));
+    let audioBlock = block.getInputTargetBlock('AUDIO');
+    const actualAudio = [];
+    while (audioBlock) {
+      actualAudio.push(audioBlock.getFieldValue('AUDIO_LABEL'));
+      audioBlock = audioBlock.nextConnection && audioBlock.nextConnection.targetBlock();
+    }
 
+    const audioMatch =
+      actualAudio.length === expected.audio.length &&
+      actualAudio.every(a => expected.audio.includes(a));
 
-  if (!genreMatch || !factMatch || !audioMatch) {
-    allCorrect = false;
-  }
-});
+    if (!genreMatch || !factMatch || !audioMatch) {
+      allCorrect = false;
+    }
+  });
 
   if (allCorrect) {
     alert("🎉 All answers are correct!");
@@ -221,3 +253,7 @@ const audioMatch =
     alert("❌ Some answers are incorrect. Please try again.");
   }
 }
+
+
+// Start when page loads
+window.addEventListener('load', start);

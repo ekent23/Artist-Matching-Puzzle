@@ -1,0 +1,62 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+
+
+
+  <category name="Artists" colour="#5CA65C">
+    <label text="📝 Blank Artist Block:"></label>
+    <block type="artist_block"></block>
+     <sep gap="20"></sep>
+      <!--the artist blocks in the toolbox -->
+    <label text="🖼️ Artist Images (drag to Artist block):"></label>
+    <block type="artist_image_adele"></block>
+    <block type="artist_image_kanye"></block>
+    <block type="artist_image_carrie"></block>
+  </category>
+
+
+  <!--the genre blocks in the toolbox -->
+  <category name="Genres" colour="#5C7EA6">
+    <block type="genre_block">
+      <field name="GENRE_NAME">Pop</field>
+    </block>
+    <block type="genre_block">
+      <field name="GENRE_NAME">Hip-Hop</field>
+    </block>
+    <block type="genre_block">
+      <field name="GENRE_NAME">Country</field>
+    </block>
+  </category>
+
+
+  <!--the facts  blocks in the toolbox -->
+  <category name="Facts" colour="#A65C81">
+    <block type="fact_block">
+      <field name="FACT_TEXT">This person shares the record with Beyoncé for the most Grammy Awards won by a female artist in a single night.</field>
+    </block>
+    <block type="fact_block">
+      <field name="FACT_TEXT">This song was a diss to Drake</field>
+    </block>
+    <block type="fact_block">
+      <field name="FACT_TEXT">The song was also one of the first country songs to reach top 10 on the Billboard Hot 100 and spend 64 consecutive weeks up there.</field>
+    </block>
+  </category>
+
+
+
+
+  <!--the audip clips in the toolbox -->
+  <category name="Audio Clips" colour="#E6A65C">
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Adele Clip</field>
+      <field name="AUDIO_URL">Skyfall.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Kanye Clip</field>
+      <field name="AUDIO_URL">LiftYourself.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Carrie Clip</field>
+      <field name="AUDIO_URL">BeforeHeCheats.mp3</field>
+    </block>
+  </category>
+</xml>

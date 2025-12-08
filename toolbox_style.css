@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f6f6f6;
+}
+
+#header {
+  background-color: #584141;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #b38cdc;
+}
+
+#controls button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#checkButton {
+  background-color: #c74d4d;
+  color: white;
+}
+
+#blocklyDiv {
+  height: calc(100vh - 60px);
+  width: 100%;
+}
+
+/* Custom Blockly Toolbox Styling */
+.blocklyToolboxCategoryLabel {
+  color: white;
+}
+
+.blocklyToolboxContents {
+  padding: 0.5em;
+}
+
+.blocklyToolboxCategory {
+  padding: 3px;
+  margin-bottom: 0.5em;
+  border-radius: 4px;
+}
