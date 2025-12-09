@@ -37,7 +37,6 @@ body {
   width: 100%;
 }
 
-/* Custom Blockly Toolbox Styling */
 .blocklyToolboxCategoryLabel {
   color: white;
 }
@@ -50,4 +49,18 @@ body {
   padding: 3px;
   margin-bottom: 0.5em;
   border-radius: 4px;
+}
+
+/* Text wrapping for long fact blocks */
+.blocklyText {
+  max-width: 400px;
+  word-wrap: break-word;
+  white-space: normal !important;
+}
+
+/* Specifically target fact block text */
+.blocklyDraggable .blocklyText {
+  max-width: 400px;
+  word-wrap: break-word;
+  white-space: pre-wrap !important;
 }

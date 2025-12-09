@@ -2,21 +2,28 @@
 
 
 
+      <!--the blank artist template -->
   <category name="Artists" colour="#5CA65C">
     <label text="📝 Blank Artist Block:"></label>
     <block type="artist_block"></block>
      <sep gap="20"></sep>
+
       <!--the artist blocks in the toolbox -->
     <label text="🖼️ Artist Images (drag to Artist block):"></label>
     <block type="artist_image_adele"></block>
     <block type="artist_image_kanye"></block>
     <block type="artist_image_carrie"></block>
+    <block type="artist_image_taylor"></block>
+    <block type="artist_image_chris"></block>
+    <block type="artist_image_reba"></block>
+    <block type="artist_image_nirvana"></block>
+    <block type="artist_image_metallica"></block>
   </category>
 
 
   <!--the genre blocks in the toolbox -->
   <category name="Genres" colour="#5C7EA6">
-    <block type="genre_block">
+    <block type="genre_block"> 
       <field name="GENRE_NAME">Pop</field>
     </block>
     <block type="genre_block">
@@ -25,20 +32,77 @@
     <block type="genre_block">
       <field name="GENRE_NAME">Country</field>
     </block>
+    <block type="genre_block">
+      <field name="GENRE_NAME">Rock</field>
+    </block>
+     <block type="genre_block"> 
+      <field name="GENRE_NAME">Jazz</field>
+    </block>
+    <block type="genre_block"> 
+      <field name="GENRE_NAME">Alternative</field>
+    </block>
   </category>
 
 
   <!--the facts  blocks in the toolbox -->
   <category name="Facts" colour="#A65C81">
+  <block type="fact_block">
+  <field name="FACT_TEXT">This person once sold a painting for over $100 million, making it one of the most expensive artworks ever auctioned.</field>
+</block>
     <block type="fact_block">
       <field name="FACT_TEXT">This person shares the record with Beyoncé for the most Grammy Awards won by a female artist in a single night.</field>
     </block>
     <block type="fact_block">
-      <field name="FACT_TEXT">This song was a diss to Drake</field>
+      <field name="FACT_TEXT">Has a daughter named North and a son named Saint.</field>
     </block>
     <block type="fact_block">
-      <field name="FACT_TEXT">The song was also one of the first country songs to reach top 10 on the Billboard Hot 100 and spend 64 consecutive weeks up there.</field>
+      <field name="FACT_TEXT">The song rose to fame after winning American Idol in 2005.</field>]
     </block>
+    <block type="fact_block">
+      <field name="FACT_TEXT">Grew up on a Christmas tree farm.</field>
+</block>
+<block type="fact_block">
+  <field name="FACT_TEXT">This person painted over 2,000 works and is credited with pioneering a major modern art movement.</field>
+</block>
+
+    <block type="fact_block">
+      <field name="FACT_TEXT">Has won 11 Grammy Awards, including the first person to win Album of the Year four times.</field>
+      </block>
+    <block type="fact_block">
+      <field name="FACT_TEXT">Assaulted his then-girlfriend Rihanna during an argument, leaving her with visible facial injuries that required hospitalization.</field>
+      </block>
+      <block type="fact_block">
+  <field name="FACT_TEXT">This person’s music video became the first to reach over one billion views on YouTube.</field>
+</block>
+ </block>
+      <block type="fact_block">
+  <field name="FACT_TEXT">This person’s music is not good.</field>
+</block>
+ <block type="fact_block">
+      <field name="FACT_TEXT">Known as "The Queen of Country".</field>
+      </block>
+
+ <block type="fact_block">
+      <field name="FACT_TEXT">Has a sitcom anmed after them.</field>
+      </block>
+
+
+ <block type="fact_block">
+      <field name="FACT_TEXT">
+ One of their Band members killed themselves in their home.</field>
+      </block>
+
+ <block type="fact_block">
+      <field name="FACT_TEXT">Their album "Nevermind" is often credited with bringing grunge and alternative rock to a mainstream audience.</field>
+      </block>
+
+<block type="fact_block">
+      <field name="FACT_TEXT">The only band to have performed on all seven continents.</field>
+      </block>
+
+<block type="fact_block">
+      <field name="FACT_TEXT">TTheir self-titled album, also known as "The Black Album," is one of the best-selling albums worldwide.</field>
+      </block>
   </category>
 
 
@@ -47,16 +111,37 @@
   <!--the audip clips in the toolbox -->
   <category name="Audio Clips" colour="#E6A65C">
     <block type="audio_block">
-      <field name="AUDIO_LABEL">Adele Clip</field>
+      <field name="AUDIO_LABEL">Random Clip1</field>
       <field name="AUDIO_URL">Skyfall.mp3</field>
     </block>
     <block type="audio_block">
-      <field name="AUDIO_LABEL">Kanye Clip</field>
+      <field name="AUDIO_LABEL">Random Clip2</field>
       <field name="AUDIO_URL">LiftYourself.mp3</field>
     </block>
     <block type="audio_block">
-      <field name="AUDIO_LABEL">Carrie Clip</field>
+      <field name="AUDIO_LABEL">Random Clip3</field>
       <field name="AUDIO_URL">BeforeHeCheats.mp3</field>
     </block>
-  </category>
+
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Random Clip4</field>
+      <field name="AUDIO_URL">Taylor.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Random Clip5</field>
+      <field name="AUDIO_URL">Reba.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Random Clip6</field>
+      <field name="AUDIO_URL">Chris.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Random Clip7</field>
+      <field name="AUDIO_URL">Nirvana.mp3</field>
+    </block>
+    <block type="audio_block">
+      <field name="AUDIO_LABEL">Random Clip8</field>
+      <field name="AUDIO_URL">Metallica.mp3</field>
+    </block>
+     </category>
 </xml>
