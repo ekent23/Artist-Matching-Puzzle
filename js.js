@@ -111,22 +111,18 @@ Blockly.Blocks['audio_block'] = {
 let workspace;
 
 function start() {
-  // starts the toolbox 
-  fetch('toolbox.xml')
-    .then(response => response.text())
-    .then(toolboxXml => {
-      workspace = Blockly.inject('blocklyDiv', {
-        toolbox: toolboxXml,
-        trashcan: true,
-        grid: { spacing: 25, length: 3, colour: '#ccc', snap: true },
-        move: { scrollbars: true, drag: true, wheel: true }
-      });
+  // gets toolbox from embedded XML instead of fetching
+  const toolbox = document.getElementById('toolbox');
+  
+  workspace = Blockly.inject('blocklyDiv', {
+    toolbox: toolbox,
+    trashcan: true,
+    grid: { spacing: 25, length: 3, colour: '#ccc', snap: true },
+    move: { scrollbars: true, drag: true, wheel: true }
+  });
 
-     
-      createInitialBlocks();
-    });
+  createInitialBlocks();
 }
-
 
 //pre placed blocks
 //this is so the users know what to do or an exmaple
